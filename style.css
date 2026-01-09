@@ -1,0 +1,28 @@
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(120px, 1fr)
+  ); /* largura mínima menor */
+  gap: 15px; /* menos espaço entre cards */
+  padding: 10px; /* menos padding nas laterais */
+}
+
+.card {
+  padding: 10px; /* menor padding interno */
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-logo {
+  width: 40px; /* logos menores */
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}

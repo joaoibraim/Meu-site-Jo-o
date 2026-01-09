@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre - João Ibraim</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #00090e;
+        color: white;
+        min-height: 100vh;
+        overflow: hidden; /* será liberado após preloader */
+      }
+
+      /* Cabeçalho fixo */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(8px);
+        z-index: 10;
+      }
+
+      header h3 {
+        font-size: 1.1rem;
+        color: #f8f8f8;
+        font-weight: 500;
+      }
+
+      header h3 .highlight {
+        color: #1143e6;
+      }
+
+      /* Menu hamburger */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+      }
+
+      .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background-color: #00eaff;
+        transition: 0.3s;
+      }
+
+      nav {
+        display: flex;
+        gap: 20px;
+      }
+
+      nav a {
+        color: #00eaff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      nav a:hover {
+        color: #1143e6;
+      }
+
+      /* Mobile styles */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: flex;
+        }
+
+        nav {
+          position: fixed;
+          top: 60px;
+          right: 0;
+          background: rgba(0, 0, 0, 0.9);
+          height: calc(100vh - 60px);
+          width: 200px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: start;
+          padding-top: 20px;
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+        }
+
+        nav.open {
+          transform: translateX(0);
+        }
+
+        nav a {
+          margin: 15px 0;
+          font-size: 1.2rem;
+        }
+      }
+
+      /* Conteúdo principal */
+      .content {
+        padding-top: 100px; /* para não ficar atrás do cabeçalho */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-family: "Roboto", sans-serif;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        color: #1143e6;
+      }
+
+      p {
+        max-width: 700px;
+        line-height: 1.6;
+        font-size: 1rem;
+        margin: 10px 20px;
+        color: #f0f0f0;
+      }
+
+      /* Preloader */
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #00090e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        flex-direction: column;
+      }
+
+      .loader-bar-container {
+        width: 70%;
+        max-width: 400px;
+        height: 20px;
+        border: 2px solid #00eaff;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .loader-bar {
+        height: 100%;
+        width: 0;
+        background-color: #00eaff;
+        border-radius: 10px 0 0 10px;
+        transition: width 0.2s ease;
+      }
+
+      #loader-percent {
+        color: #00eaff;
+        margin-top: 10px;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+      }
+
+   .grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* largura mínima menor */
+  gap: 15px; /* menos espaço entre cards */
+  padding: 10px; /* menos padding nas laterais */
+}
+
+.card {
+  padding: 10px; /* menor padding interno */
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-logo {
+  width: 40px;   /* logos menores */
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader-bar-container">
+        <div class="loader-bar" id="loader-bar"></div>
+        <span id="loader-percent">0%</span>
+      </div>
+    </div>
+
+    <!-- Cabeçalho fixo -->
+    <header>
+      <h3>João Ibraim <span class="highlight">| Developer.</span></h3>
+
+      <!-- Hamburger -->
+      <div class="menu-toggle" id="menu-toggle">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <!-- Menu -->
+      <nav id="nav-menu">
+        <a href="index.html">Início</a>
+        <a href="#">Sobre</a>
+        <a href="#">Serviços</a>
+        <a href="#">Contato</a>
+      </nav>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div class="content">
+      <h3>Conheça <span class="highlight"> um pouco</span></h3>
+      <h1>Sobre Mim</h1>
+
+      <div class="sobre-container">
+        <!-- Foto no lado esquerdo -->
+        <div class="sobre-foto">
+          <img src="sobre-mim.jpg" alt="Foto de João Ibraim" />
+        </div>
+
+        <!-- Texto no lado direito -->
+        <div class="sobre-texto">
+  <h2><strong>Olá, Me chamo João Ibraim</strong></h2>
+
+  <p>
+    Sou desenvolvedor web com mais de 3 anos de experiência na área de programação.
+Atuo no mercado criando sites, sistemas e automações, sempre com foco em oferecer soluções que realmente façam a diferença para meus clientes.
+  </p>
+  <p>
+    Meu objetivo é entregar qualidade e inovação em cada projeto, explorando novas ideias, tecnologias e estratégias que possam agregar valor e facilitar processos. Gosto de transformar desafios em oportunidades, trazendo resultados práticos e eficientes.
+  </p>
+  <p>Seja em um site institucional, um sistema sob medida ou uma automação personalizada, meu objetivo é sempre o mesmo: ajudar negócios e pessoas a alcançarem seus objetivos com a tecnologia. 🚀</p>
+</div>
+
+<section id="habilidades">
+      <h3>Conheça <span class="highlight"> as minhas</span></h3>
+      <h1>Habilidades</h1>
+      <p> Ao longo desses 3 anos na programação, descobri que o desenvolvimento vai muito além de escrever linhas de código — é sobre dar vida a ideias e criar soluções que realmente fazem diferença. Nesse tempo, construí uma base sólida em HTML, CSS e JavaScript, que são o coração da criação de sites modernos, além de aprofundar meu conhecimento em Python, uma linguagem que utilizo bastante para desenvolver sistemas e automações.</p>
+      <p> Sigo estudando e me atualizando constantemente, porque acredito que a tecnologia está sempre mudando — e eu quero estar preparado para oferecer o que há de melhor. </p>
+</section>
+
+
+<div class="grid grid-3">
+  <!-- HTML5 -->
+  <div class="card">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" class="card-logo" />
+    <h3>HTML5</h3>
+    <p>Estrutura e organização de páginas web modernas e acessíveis.</p>
+  </div>
+
+  <!-- CSS3 -->
+  <div class="card">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" class="card-logo" />
+    <h3>CSS3</h3>
+    <p>Estilização avançada, animações e layouts responsivos.</p>
+  </div>
+
+  <!-- JavaScript -->
+  <div class="card">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="card-logo" />
+    <h3>JavaScript</h3>
+    <p>Interatividade, lógica e funcionalidades dinâmicas para web.</p>
+  </div>
+
+  <!-- React -->
+  <div class="card">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="card-logo" />
+    <h3>React</h3>
+    <p>Criação de interfaces modernas, componentes reutilizáveis e SPA.</p>
+  </div>
+
+  <!-- Node.js -->
+  <div class="card">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="card-logo" />
+    <h3>Node.js</h3>
+    <p>Desenvolvimento backend com JavaScript, APIs e aplicações escaláveis.</p>
+  </div>
+
+  <!-- Python -->
+  <div class="card">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="card-logo" />
+    <h3>Python</h3>
+    <p>Programação versátil para web, automação e análise de dados.</p>
+  </div>
+</div>
+
+
+
+    <style>
+      .sobre-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 30px;
+        flex-wrap: wrap; /* garante responsividade */
+      }
+
+      .sobre-foto img {
+        width: 250px; /* largura fixa */
+        height: 350px; /* altura fixa */
+        object-fit: cover; /* corta o excesso e preenche o espaço */
+        border-radius: 8px;
+        border: 3px solid #01061b5d;
+        box-shadow: 0 0 15px rgba(0, 76, 161, 0.904);
+      }
+
+      .sobre-texto {
+        max-width: 600px;
+        text-align: left;
+      }
+
+      .sobre-texto p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        color: #f0f0f0;
+      }
+
+      @media (max-width: 768px) {
+        .sobre-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .sobre-texto {
+          text-align: center;
+        }
+      }
+    </style>
+
+    <!-- Scripts -->
+    <script>
+      // Menu toggle
+      const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("nav-menu");
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("open");
+      });
+
+      // Preloader barra de carregamento
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        const bar = document.getElementById("loader-bar");
+        const percent = document.getElementById("loader-percent");
+
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 1; // incrementa 1%
+          if (progress <= 100) {
+            bar.style.width = progress + "%";
+            percent.textContent = progress + "%";
+          } else {
+            clearInterval(interval);
+            // Fade-out do preloader
+            let fade = 1;
+            const fadeOut = setInterval(() => {
+              fade -= 0.05;
+              preloader.style.opacity = fade;
+              if (fade <= 0) {
+                clearInterval(fadeOut);
+                preloader.style.display = "none";
+                document.body.style.overflow = "auto";
+              }
+            }, 20);
+          }
+        }, 15); // ajuste a velocidade do preenchimento
+      });
+    </script>
+  </body>
+</html>

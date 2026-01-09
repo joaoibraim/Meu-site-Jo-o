@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>João Ibraim - Desenvolvedor Web</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        font-family: "Poppins", sans-serif;
+        background: #00090e;
+        color: white;
+        overflow: hidden;
+      }
+
+      /* Cabeçalho fixo */
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(8px);
+        z-index: 10;
+      }
+
+      header h3 {
+        font-size: 1.1rem;
+        color: #f8f8f8;
+        font-weight: 500;
+      }
+
+      header h3 .highlight {
+        color: #1143e6;
+      }
+
+      /* Menu hamburger */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+      }
+
+      .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background-color: #ffffff;
+        transition: 0.3s;
+      }
+
+      nav {
+        display: flex;
+        gap: 20px;
+      }
+
+      nav a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      nav a:hover {
+        color: #00369b;
+      }
+
+      /* Mobile styles */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: flex;
+        }
+
+        nav {
+          position: fixed;
+          top: 60px;
+          right: 0;
+          background: rgba(0, 0, 0, 0.9);
+          height: calc(100vh - 60px);
+          width: 200px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: start;
+          padding-top: 20px;
+          transform: translateX(100%);
+          transition: transform 0.3s ease-in-out;
+        }
+
+        nav.open {
+          transform: translateX(0);
+        }
+
+        nav a {
+          margin: 15px 0;
+          font-size: 1.2rem;
+        }
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      .content {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 6vw, 5rem); /* maior mínimo e maior máximo */
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-family: "Roboto", sans-serif;
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+        font-weight: 400;
+        margin-top: 10px;
+      }
+
+      .changing-text {
+        color: #1143e6;
+        font-weight: bold;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cabeçalho fixo -->
+    <header>
+      <h3>João Ibraim <span class="highlight">| Developer.</span></h3>
+
+      <!-- Hamburger -->
+      <div class="menu-toggle" id="menu-toggle">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      <!-- Menu -->
+      <nav id="nav-menu">
+        <a href="#">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="servicos.html">Servicos</a>
+        <a href="#">Contato</a>
+      </nav>
+    </header>
+
+    <!-- Container das partículas -->
+    <div id="particles-js"></div>
+
+    <!-- Conteúdo principal -->
+    <div class="content">
+      <h1 class="fade-in">João Ibraim</h1>
+      <h2 class="fade-in" style="animation-delay: 1s">
+        Desenvolvedor <span class="changing-text">Web</span>
+      </h2>
+    </div>
+
+    <!-- Script Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 150, density: { enable: true, value_area: 800 } },
+          color: { value: "#00eaff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00eaff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: { enable: true, speed: 3 },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+          },
+          modes: {
+            grab: { distance: 200, line_linked: { opacity: 0.7 } },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      // Texto dinâmico que muda
+      const words = ["Web", "Freelancer", "Full Stack"];
+      let i = 0;
+      const span = document.querySelector(".changing-text");
+
+      setInterval(() => {
+        span.style.opacity = 0;
+        setTimeout(() => {
+          i = (i + 1) % words.length;
+          span.textContent = words[i];
+          span.style.opacity = 1;
+        }, 500);
+      }, 2000);
+
+      // Menu toggle
+      const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("nav-menu");
+
+      toggle.addEventListener("click", () => {
+        menu.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>
